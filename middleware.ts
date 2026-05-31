@@ -2,20 +2,19 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-    // Get token from cookies
+    // Retrieve the JWT token from cookies (set during login)
     const token = request.cookies.get("token")?.value;
 
-    // Protected routes
+    // Define routes that require authentication
     const isProtectedRoute = request.nextUrl
         .pathname.startsWith("/dashboard");
 
-    // Auth routes (login/register)
+    // Define routes that should be inaccessible to authenticated users
     const isAuthRoute =
         request.nextUrl.pathname === "/login" ||
         request.nextUrl.pathname === "/register";
 
-    // If accessing protected route without token
-    // → redirect to login
+    // Enforcement: Redirect unauthenticated users trying to access protected routes
     if (isProtectedRoute && !token) {
         const loginUrl = new URL(
             "/login",
@@ -24,8 +23,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(loginUrl);
     }
 
-    // If accessing login page with valid token
-    // → redirect to dashboard
+    // Enforcement: Redirect authenticated users away from login/register pages
     if (isAuthRoute && token) {
         const dashboardUrl = new URL(
             "/dashboard",

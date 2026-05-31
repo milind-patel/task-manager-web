@@ -28,17 +28,23 @@ export default function DashboardPage() {
     }
   }, [router]);
 
+  // State for filtering, showing modal, and tracking task edits
   const [filters, setFilters] = useState<TaskFilters>({});
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
+  // Fetch tasks with Apollo - passing active filters as variables
   const { data, loading, refetch } = useQuery(GET_TASKS, {
     variables: {
       status: filters.status || null,
       priority: filters.priority || null,
     },
+    // fetchPolicy: "cache-and-network" could be added here for highly concurrent apps
   });
 
+  // Apollo Mutations for CRUD operations
+  // We use refetch() on completion to ensure the UI stays synchronized with the backend
+  // Optimization note: For larger apps, we could use update() to write directly to the Apollo cache instead of refetching
   const [createTask] = useMutation(CREATE_TASK, {
     onCompleted: () => {
       setShowForm(false);
@@ -57,10 +63,11 @@ export default function DashboardPage() {
     onCompleted: () => refetch(),
   });
 
+  // Secure logout process
   const handleLogout = () => {
-    Cookies.remove("token", { path: "/" });
-    client.clearStore();
-    router.replace("/login");
+    Cookies.remove("token", { path: "/" }); // Remove token from cookie storage
+    client.clearStore(); // Clear Apollo cache to prevent sensitive data leaks
+    router.replace("/login"); // Redirect to login
   };
 
   const tasks: Task[] = data?.tasks || [];
