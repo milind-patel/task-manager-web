@@ -17,6 +17,12 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
+/**
+ * Main Dashboard Page
+ * 
+ * Handles displaying tasks, filtering, creating/editing/deleting tasks.
+ * Uses Apollo Client for state management and GraphQL queries/mutations.
+ */
 export default function DashboardPage() {
   const router = useRouter();
   const client = useApolloClient();
@@ -34,7 +40,7 @@ export default function DashboardPage() {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   // Fetch tasks with Apollo - passing active filters as variables
-  const { data, loading, refetch } = useQuery(GET_TASKS, {
+  const { data, loading, refetch } = useQuery<{ tasks: Task[] }>(GET_TASKS, {
     variables: {
       status: filters.status || null,
       priority: filters.priority || null,

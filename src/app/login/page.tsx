@@ -35,7 +35,7 @@ export default function LoginPage() {
         variables: { email, password },
       });
 
-      const token = data[key].token;
+      const token = (data as Record<string, { token: string }>)[key].token;
       Cookies.set("token", token, { expires: 1 });
       router.push("/dashboard");
     } catch (err: unknown) {

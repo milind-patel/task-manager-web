@@ -18,6 +18,12 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * TaskForm Component
+ * 
+ * A modal form used for both creating and editing tasks.
+ * Validates inputs and triggers the onSubmit callback with form data.
+ */
 export default function TaskForm({ task, onSubmit, onClose }: Props) {
   const [values, setValues] = useState<FormValues>({
     title: task?.title || "",

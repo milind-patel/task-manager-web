@@ -45,5 +45,10 @@ A modern Next.js frontend for personal task management, interfacing with a Ruby 
 - **Summary Dashboard:** Overview of total and filtered tasks.
 - **Responsive Layout:** Mobile-first Tailwind design ensuring usability on all devices.
 
+## 🧪 Testing
+- **Framework:** Jest & React Testing Library
+- **Running Tests:** `npm run test` (or `npm run test:watch` for watch mode)
+- Includes unit tests for key components ensuring UI correctness and interaction handling.
+
 ## 🤖 AI Tools Used
 Claude AI and GitHub Copilot were utilized during development to accelerate feature building, enforce best practices, and conduct initial code reviews.
