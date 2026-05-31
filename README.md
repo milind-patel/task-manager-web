@@ -43,6 +43,7 @@ A modern Next.js frontend for personal task management, interfacing with a Ruby 
 - **Advanced Filtering:** Filter tasks instantly by Status (Pending, In Progress, Completed) and Priority.
 - **Inline Editing:** Quick status updates directly from the task card.
 - **Summary Dashboard:** Overview of total and filtered tasks.
+- **Enhanced UI/UX:** Features skeleton loading states, friendly empty states, and dynamic toast notifications for user feedback.
 - **Responsive Layout:** Mobile-first Tailwind design ensuring usability on all devices.
 
 ## 🧪 Testing
