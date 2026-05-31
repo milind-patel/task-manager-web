@@ -34,7 +34,7 @@ describe('TaskCard', () => {
     expect(screen.getByText('Test Task')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
     expect(screen.getByText('PENDING')).toBeInTheDocument();
-    expect(screen.getByText('HIGH')).toBeInTheDocument();
+    expect(screen.getByText('● HIGH')).toBeInTheDocument();
   });
 
   it('calls onEdit when edit button is clicked', () => {
@@ -77,7 +77,7 @@ describe('TaskCard', () => {
       />
     );
 
-    const statusSelect = screen.getByDisplayValue('Pending');
+    const statusSelect = screen.getByDisplayValue('⏳ Pending');
     fireEvent.change(statusSelect, { target: { value: 'COMPLETED' } });
     expect(mockOnStatusChange).toHaveBeenCalledWith('COMPLETED');
   });
